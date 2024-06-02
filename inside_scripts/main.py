@@ -6,5 +6,5 @@ import time
 if __name__ == "__main__":
     time.sleep(1200)
     scan = Scan("admin", "admin")
-    mail = Mail("example.mail.test.test@gmail.com", "crbhqbaqllvulyme")
+    mail = Mail(open("mail.txt", "r").read(), open("password.txt", "r").read())
     Main(mail, scan).run()
