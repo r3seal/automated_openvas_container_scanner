@@ -18,8 +18,9 @@ class Main:
         with open("recipients.txt", "r") as f:
             for line in f:
                 self.recipients.append(line.strip())
+
         target_id = self.scan.create_target("automated_openvas_targets", hosts_list=hosts_list)
-        task_id = self.scan.create_task("automated_openvas_scan", target_id)
+        task_id = self.scan.create_task("automated_openvas_scan", target_id=target_id)
         while True:
             task_response = self.scan.start_task(task_id)
             report_id = self.scan.find_report_id_from_task_response(task_response)
