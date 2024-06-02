@@ -25,7 +25,6 @@ def get_host_ip_and_mask():
 
         return ip_address, netmask
     except Exception as e:
-        print(f"Error while getting host IP and mask: {e}")
         return None, None
 
 
@@ -46,15 +45,12 @@ def is_host_up(ip):
     except subprocess.TimeoutExpired:
         return False
     except Exception as e:
-        print(f"Error while checking host {ip}: {e}")
         return False
 
 
 def scan_network(network):
     net = ipaddress.ip_network(network, strict=False)
     active_hosts = []
-
-    print(f"Scanning network: {network}")
 
     with ThreadPoolExecutor(max_workers=100) as executor:
         results = list(executor.map(is_host_up, net.hosts()))
@@ -76,24 +72,4 @@ def get_default_gateway():
 
         return default_gateway
     except Exception as e:
-        print(f"Error while getting default gateway: {e}")
         return None
-
-
-if __name__ == "__main__":
-    host_ip, host_mask = get_host_ip_and_mask()
-    if host_ip and host_mask:
-        print(f"Host IP: {host_ip}")
-        print(f"Subnet Mask: {host_mask}")
-        network = ipaddress.IPv4Network(f"{host_ip}/{host_mask}", strict=False)
-        active_hosts = scan_network(network)
-        active_hosts.remove(host_ip)
-        try:
-            active_hosts.remove(get_default_gateway())
-        except:
-            pass
-        print(f"Active hosts in the network {network}:")
-        # Return the list of active hosts
-        print(active_hosts)
-    else:
-        print("Could not determine the host IP and subnet mask.")
