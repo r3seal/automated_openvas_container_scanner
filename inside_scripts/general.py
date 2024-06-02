@@ -7,7 +7,7 @@ class Main:
         self.mail = mail
         self.scan = scan
         self.send_period = 18000  # 5 hours
-        self.recipients = ["example.mail.test.test@gmail.com"]
+        self.recipients = []
 
     def run(self):
         while True:
