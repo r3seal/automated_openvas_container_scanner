@@ -10,18 +10,17 @@ class Main:
         self.recipients = []
 
     def run(self):
+        hosts_list = []
+
+        with open("hostIPS.txt", "r") as f:
+            for line in f:
+                hosts_list.append(line)
+        with open("recipients.txt", "r") as f:
+            for line in f:
+                self.recipients.append(line.strip())
+        target_id = self.scan.create_target("automated_openvas_targets", hosts_list=hosts_list)
+        task_id = self.scan.create_task("automated_openvas_scan", target_id)
         while True:
-            hosts_list = []
-
-            with open("hostIPS.txt", "r") as f:
-                for line in f:
-                    hosts_list.append(line)
-            with open("recipients.txt", "r") as f:
-                for line in f:
-                    self.recipients.append(line.strip())
-
-            target_id = self.scan.create_target("automated_openvas_targets", hosts_list=hosts_list)
-            task_id = self.scan.create_task("automated_openvas_scan", target_id)
             task_response = self.scan.start_task(task_id)
             report_id = self.scan.find_report_id_from_task_response(task_response)
             while not self.scan.is_task_finished(report_id):
