@@ -21,7 +21,7 @@ class Scan:
         print(self.gmp.get_version())
 
     def create_task(self, name, target_id):
-        response = self.gmp.create_task(name=name, config_id='8715c877-47a0-438d-98a3-27c7a6ab2196', target_id=target_id, scanner_id='08b69003-5fc2-4037-a479-93b440211c73')
+        response = self.gmp.create_task(name=name, config_id='2d3f051c-55ba-11e3-bf43-406186ea4fc5', target_id=target_id, scanner_id='08b69003-5fc2-4037-a479-93b440211c73')
         root = etree.fromstring(response)
         task_id = root.attrib.get("id")
         return task_id
