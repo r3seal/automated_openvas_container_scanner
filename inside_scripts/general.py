@@ -25,7 +25,7 @@ class Main:
             task_response = self.scan.start_task(task_id)
             report_id = self.scan.find_report_id_from_task_response(task_response)
             while not self.scan.is_task_finished(report_id):
-                time.sleep(600)  # 10 minutes
+                time.sleep(180)  # 3 minutes
             self.scan.save_report_to_pdf(report_id, "report.pdf")
             self.send_mail("report.pdf")
             time.sleep(self.send_period)
