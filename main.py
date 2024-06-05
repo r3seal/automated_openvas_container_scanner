@@ -21,7 +21,7 @@ if __name__ == "__main__":
             active_hosts.remove(get_default_gateway())
         except:
             pass
-        with open("inside_scripts/hostIPS.txt", "w") as f:
+        with open("../scripts_data/hostIPS.txt", "w") as f:
             for IP in active_hosts:
                 f.write(f"{IP}\n")
 
