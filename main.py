@@ -24,20 +24,4 @@ if __name__ == "__main__":
         with open("../scripts_data/hostIPS.txt", "w") as f:
             for IP in active_hosts:
                 f.write(f"{IP}\n")
-
-    # # Now run Docker commands
-    # commands = [
-    #     'docker run --detach --publish 8080:9392 -e PASSWORD="admin" --name openvas immauss/openvas --publish 9390:9390 -e HTTPS=true',
-    #     'timeout /t 10 /nobreak',
-    #     'docker cp inside_scripts openvas:/',
-    #     'docker exec -d -w /inside_scripts openvas python3 other_main.py'
-    # ]
-    #
-    # for command in commands:
-    #     print(f"Running command: {command}")
-    #     retcode, stdout, stderr = run_command(command)
-    #     if retcode != 0:
-    #         print(f"Command failed with error code {retcode}. Output:\n{stderr.decode()}")
-    #         exit(retcode)
-    #     else:
-    #         print(stdout.decode())
+                
